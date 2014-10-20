@@ -11,7 +11,7 @@ describe PictureUploader do
     end
 
     it 'stores the original file' do
-      expect(subject.file.exists?).to be_true
+      expect(subject.file.exists?).to be
 
       expect(subject.file.file).to eq(
         File.join(Rails.root, 'test/uuid/original.jpg')
@@ -19,7 +19,7 @@ describe PictureUploader do
     end
 
     it 'stores the square_100 version' do
-      expect(subject.square_100.file.exists?).to be_true
+      expect(subject.square_100.file.exists?).to be
       expect(subject.square_100.file.file).to eq(
         File.join(Rails.root, 'test/uuid/square_100.jpg')
       )
@@ -37,14 +37,14 @@ describe PictureUploader do
   describe '.delete_store_dir!' do
     before do
       subject.store!(file)
-      expect(Dir.exists?(File.dirname(subject.full_path))).to be_true
+      expect(Dir.exists?(File.dirname(subject.full_path))).to be
       subject.delete_store_dir!
     end
 
     it 'deletes the store dir' do
-      expect(subject.file.exists?).to be_false
-      expect(subject.square_100.file.exists?).to be_false
-      expect(Dir.exists?(File.dirname(subject.full_path))).to be_false
+      expect(subject.file.exists?).to_not be
+      expect(subject.square_100.file.exists?).to_not be
+      expect(Dir.exists?(File.dirname(subject.full_path))).to_not be
     end
   end
 end

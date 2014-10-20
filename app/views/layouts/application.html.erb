@@ -8,6 +8,22 @@
 </head>
 <body>
 
+<div class='menu'>
+  <%= link_to t('home'), root_path %>
+
+  <% if @current_user.authenticated? %>
+    <%= link_to t('logout'), logout_path %>
+    <p>Hello, <%= @current_user.name %></p>
+  <% else %>
+    <%= link_to t('sign_in'), sign_in_path %>
+    <%= link_to t('sign_up'), sign_up_path %>
+  <% end %>
+</div>
+
+<% flash.each do |name, msg| %>
+  <p class=<%= name %>><%= msg %></div>
+<% end %>
+
 <%= yield %>
 
 </body>

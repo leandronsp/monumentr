@@ -1,3 +1,7 @@
 CarrierWave.configure do |config|
-  config.root = File.join(Rails.root, (Rails.env.test? ? 'test' : 'pictures'))
+  config.root = Settings.carrierwave.root
+end
+
+if Rails.env.development?
+  CarrierWave.root = 'pictures'
 end

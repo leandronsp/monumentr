@@ -1,0 +1,14 @@
+<div class='center'>
+  <h1>Registration</h1>
+
+  <form action='/sign_up' method='POST'>
+    <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+    <input type='text' name='user[name]'  placeholder='Name'>
+    <input type='text' name='user[email]' placeholder='Email'>
+    <input type='password' name='user[password]' placeholder='Type a password'>
+    <input type='password' name='user[password_confirmation]' placeholder='Confirm the password'>
+    <input type='submit' class='button' value=<%= t('buttons.register') %>>
+    <p class='error hidden'></p>
+  </form>
+
+</div>

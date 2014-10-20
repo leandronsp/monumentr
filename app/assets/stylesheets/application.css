@@ -13,3 +13,111 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+    font-family: menlo;
+}
+
+h1 {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+div.center {
+  position: absolute;
+  margin-left: 33%;
+  margin-right: 50%;
+  margin-top: 10%;
+}
+
+div.center input {
+  height: 45px;
+  width: 465px;
+  font-size: 25px;
+  padding-left: 10px;
+  margin-bottom: 30px;
+}
+
+div.center p.message {
+  height: 45px;
+  width: 465px;
+  font-size: 15px;
+  text-align: center;
+  display: none;
+}
+
+div.center p {
+  height: 45px;
+  width: 465px;
+  font-size: 15px;
+  text-align: center;
+}
+
+div.center ul {
+  width: 420px;
+}
+
+div.center a.filter {
+  margin-left: 165px;
+}
+
+div.center ul > li {
+  padding-bottom: 10px;
+}
+
+div.menu {
+  float: right;
+}
+
+.inputError {
+  border-color: red;
+}
+
+p.error {
+  background: red;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+p.hidden {
+  display: none;
+}
+
+p.success {
+  background: green;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+/*
+ * Borrowed from http://www.bestcssbuttongenerator.com/#/LkN1KioBhx
+*/
+
+.button {
+  -moz-box-shadow:inset 0px 0px 14px -3px #f2fadc;
+  -webkit-box-shadow:inset 0px 0px 14px -3px #f2fadc;
+  box-shadow:inset 0px 0px 14px -3px #f2fadc;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dbe6c4), color-stop(1, #9ba892));
+  background:-moz-linear-gradient(top, #dbe6c4 5%, #9ba892 100%);
+  background:-webkit-linear-gradient(top, #dbe6c4 5%, #9ba892 100%);
+  background:-o-linear-gradient(top, #dbe6c4 5%, #9ba892 100%);
+  background:-ms-linear-gradient(top, #dbe6c4 5%, #9ba892 100%);
+  background:linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dbe6c4', endColorstr='#9ba892',GradientType=0);
+  background-color:#dbe6c4;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #b2b8ad;
+  display:inline-block;
+  cursor:pointer;
+  color:#757d6f;
+  font-family:arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #ced9bf;
+}

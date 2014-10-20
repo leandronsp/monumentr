@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'settingslogic'
 
 group :development, :test do
   gem 'codeclimate-test-reporter', require: nil
@@ -19,7 +20,7 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.1'
   gem 'guard-rspec'
   gem 'simplecov'
   gem 'machinist'

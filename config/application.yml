@@ -1,0 +1,9 @@
+development: &defaults
+  image_host: 'http://localhost:3000'
+  carrierwave:
+    root: 'public/pictures'
+test:
+  <<: *defaults
+  image_host: 'http://test.host'
+  carrierwave:
+    root: 'test'

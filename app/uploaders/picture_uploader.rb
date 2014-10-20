@@ -14,8 +14,17 @@ class PictureUploader < CarrierWave::Uploader::Base
     path
   end
 
+  def extension
+    extension_for(file)
+  end
+
+  def extension_for(file)
+    filename = file.is_a?(String) ? file : file.filename
+    File.extname(filename).try(:gsub, '.', '') || 'png'
+  end
+
   def filename
-    "original.#{model.extension}"
+    "original.#{extension}"
   end
 
   def fetch_image!

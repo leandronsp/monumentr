@@ -3,9 +3,15 @@ class Picture < ActiveRecord::Base
 
   attr_accessor :io
 
+  validates_presence_of :extension
+
   before_save do
-    self.uuid ||= SecureRandom.uuid
-    uploader.store!(self.io)
+    if self.io.present?
+      self.uuid ||= SecureRandom.uuid
+      uploader.store!(self.io)
+    else
+      false
+    end
   end
 
   after_destroy do
@@ -14,6 +20,11 @@ class Picture < ActiveRecord::Base
 
   def id
     uuid
+  end
+
+  def url(version = :original)
+    path = "/#{CarrierWave.root}/#{self.uuid}/#{version}.#{self.extension}"
+    ::Settings.image_host + path
   end
 
   def uploader

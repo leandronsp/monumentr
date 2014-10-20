@@ -20,6 +20,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.before(:suite) do
+    CarrierWave.root = Settings.carrierwave.root
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
@@ -31,6 +32,6 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    FileUtils.remove_dir('test') rescue true
+    FileUtils.remove_dir(CarrierWave.root) rescue true
   end
 end
