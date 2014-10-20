@@ -39,4 +39,32 @@ describe Collection do
       end
     end
   end
+
+  describe 'thumb, monuments_count and photos_count' do
+    let(:collection) { Collection.make! }
+
+    before do
+      monument = Monument.make!
+
+      monument.pictures = [
+        Picture.make!(uuid: 'uuid'),
+        Picture.make!(uuid: 'guid')
+      ]
+
+      collection.monuments << monument
+    end
+
+    specify '.thumb_url' do
+      expect(collection.thumb_url).to eq(Settings.image_host +
+        '/test/uuid/square_100.jpg')
+    end
+
+    specify '.monuments_count' do
+      expect(collection.monuments_count).to eq(1)
+    end
+
+    specify '.photos_count' do
+      expect(collection.photos_count).to eq(2)
+    end
+  end
 end
