@@ -1,6 +1,8 @@
-class CollectionsController < ApplicationController
+class CollectionsController < ManageController
 
-  before_filter :check_authorization
+  def edit
+    @collection = Collection.find(params[:id])
+  end
 
   def create
     @collection = Collection.new(collection_params.merge(user_id: @current_user.id))
@@ -14,17 +16,23 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def update
+    @collection = Collection.find(params[:id])
+
+    if @collection.update_attributes(collection_params)
+      flash[:success] = 'Album Updated!'
+      redirect_to edit_collection_path(@collection.id)
+    else
+      flash.now[:error] = @collection.errors.full_messages.join(',')
+      render :edit
+    end
+  end
+
   private
 
   def collection_params
     params.require(:collection).permit([
       :name, :description, :user_id, { monuments_attributes: [ :name ] }
     ])
-  end
-
-  def check_authorization
-    unless @current_user.authenticated?
-      redirect_to sign_in_path
-    end
   end
 end

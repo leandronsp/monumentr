@@ -1,0 +1,19 @@
+<div class='center'>
+  <h1>Monument: <%= @monument.name %></h1>
+  <h3>Album: <a href='<%= edit_collection_path(@collection) %>'><%= @collection.name %></a></h3>
+  <h5><%= @collection.description %></h5>
+
+  <%= form_tag monument_path(@monument), method: :put do %>
+    <input type='text' name='monument[name]' value='<%= @monument.name %>' placeholder = 'Name'>
+    <input type='text' name='monument[description]' value='<%= @monument.description %>' placeholder = 'Description'>
+    <input type='text' name='monument[category]' value='<%= @monument.category %>' placeholder = 'Category'>
+    <input type='hidden' name='monument[id]' value=<%= @monument.id %>>
+
+    <input type='submit' class='button' value=<%= t('buttons.update_monument') %>>
+
+    <p class='error hidden'></p>
+  <% end %>
+
+</div>
+
+<%= render 'collections/monuments' %>

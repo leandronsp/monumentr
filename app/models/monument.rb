@@ -5,4 +5,10 @@ class Monument < ActiveRecord::Base
 
   accepts_nested_attributes_for :monument_pictures, allow_destroy: true
   accepts_nested_attributes_for :pictures,          allow_destroy: true
+
+  validates_presence_of :name
+
+  def photos_count
+    pictures.count
+  end
 end

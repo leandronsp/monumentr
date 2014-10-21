@@ -1,0 +1,2 @@
+describe MonumentsController do
+end

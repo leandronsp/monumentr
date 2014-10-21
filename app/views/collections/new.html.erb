@@ -1,12 +1,11 @@
 <div class='center'>
   <h1>New Album</h1>
 
-  <form action=<%= collections_path %> method='POST'>
-    <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+  <%= form_tag collections_path, method: :post do %>
     <input type='text' name='collection[name]'  placeholder='Name'>
     <input type='text' name='collection[description]' placeholder='Description'>
     <input type='submit' class='button' value=<%= t('buttons.create_album') %>>
     <p class='error hidden'></p>
-  </form>
+  <% end %>
 
 </div>

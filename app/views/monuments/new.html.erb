@@ -1,0 +1,17 @@
+<div class='center'>
+  <h1>New Monument</h1>
+  <h3>Album: <%= @collection.name %></h3>
+  <h5><%= @collection.description %></h5>
+
+  <%= form_tag monuments_path, method: :post do %>
+    <input type='text' name='monument[name]'  placeholder='Name'>
+    <input type='text' name='monument[description]' placeholder='Description'>
+    <input type='text' name='monument[category]' placeholder='Category'>
+    <input type='hidden' name='monument[collection_id]' value=<%= @collection.id %>>
+    <input type='submit' class='button' value=<%= t('buttons.create_monument') %>>
+    <p class='error hidden'></p>
+  <% end %>
+
+</div>
+
+<%= render 'collections/monuments' %>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get  '/logout',   to: 'sessions#destroy', as: :logout
 
   resources :collections
+  resources :monuments
 
   root to: 'home#index'
 end

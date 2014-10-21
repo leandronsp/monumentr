@@ -3,7 +3,7 @@
 <ul class='collections'>
   <% @collections.each do |collection| %>
     <li class='card'>
-      <p><%= collection.name %></p>
+      <p><a href=<%= edit_collection_path(collection.id) %>><%= collection.name %></a></p>
       <% if collection.thumb_url %>
         <img src=<%= collection.thumb_url %>/>
       <% end %>

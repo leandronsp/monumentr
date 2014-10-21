@@ -1,0 +1,9 @@
+<h4>Monuments</h5>
+<ul class='collections'>
+  <% @collection.monuments.each do |monument| %>
+    <li class='card'>
+      <p><a href=<%= edit_monument_path(monument.id) %>><%= monument.name %></a></p>
+      <small><%= monument.photos_count %> photos</small>
+    </li>
+  <% end %>
+</ul>
