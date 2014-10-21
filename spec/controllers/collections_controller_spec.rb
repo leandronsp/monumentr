@@ -13,7 +13,7 @@ describe CollectionsController, type: :controller do
           description: 'My cool Eurotrip',
           monuments_attributes: [{ name: 'Eiffel Tower' }]
         }
-      }).with_indifferent_access
+      })
     end
 
     it 'creates the collection and redirects to collection edit' do
