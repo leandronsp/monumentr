@@ -7,3 +7,7 @@ test:
   image_host: 'http://test.host'
   carrierwave:
     root: 'test'
+production:
+  image_host: 'http://monumentr.herokuapp.com'
+  carrierwave:
+    root: 'public/pictures'
