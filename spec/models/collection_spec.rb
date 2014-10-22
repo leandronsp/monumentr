@@ -56,7 +56,7 @@ describe Collection do
 
     specify '.thumb_url' do
       expect(collection.thumb_url).to eq(Settings.image_host +
-        '/test/uuid/square_100.jpg')
+        '/test/guid/square_100.jpg')
     end
 
     specify '.monuments_count' do

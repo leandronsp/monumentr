@@ -2,10 +2,13 @@ describe CollectionsController, type: :controller do
   render_views
 
   let(:user) { User.make! }
+  let(:collection) { OpenStruct.new(id: 1, user_id: user.id, name: 'col', monuments: []) }
+
+  before do
+    session[:user_id] = user.id
+  end
 
   describe '.create' do
-    let(:collection) { double('collection', id: 1) }
-
     let(:params) do
       Hash({
         collection: {
@@ -22,7 +25,6 @@ describe CollectionsController, type: :controller do
       expect(Collection).to receive(:new).with(params[:collection]) { collection }
       expect(collection).to  receive(:save) { true }
 
-      session[:user_id] = user.id
       post :create, params
       expect(response).to redirect_to(edit_collection_path(1))
     end
@@ -32,10 +34,9 @@ describe CollectionsController, type: :controller do
         params[:collection].merge!(user_id: user.id)
 
         expect(Collection).to receive(:new).with(params[:collection]) { collection }
-        expect(collection).to  receive(:save) { false }
-        expect(collection).to  receive_message_chain('errors.full_messages') { ['Name cannot be blank'] }
+        expect(collection).to receive(:save) { false }
+        expect(collection).to receive_message_chain('errors.full_messages') { ['Name cannot be blank'] }
 
-        session[:user_id] = user.id
         post :create, params
         expect(response).to render_template(:new)
         expect(response.body).to match('Name cannot be blank')
@@ -44,8 +45,62 @@ describe CollectionsController, type: :controller do
 
     context 'unauthenticated' do
       it 'redirects to sign in page' do
+        session[:user_id] = nil
         post :create
         expect(response).to redirect_to(sign_in_path)
+      end
+    end
+  end
+
+  context '.edit' do
+    it 'renders form with the collection' do
+      expect(Collection).to receive(:find).with('1') { collection }
+      get :edit, id: collection.id
+
+      expect(response).to render_template(:edit)
+    end
+
+    context 'not the same user' do
+      let(:collection) { OpenStruct.new(id: 1, user_id: 4) }
+
+      it 'redirects to dashboard with error message' do
+        expect(Collection).to receive(:find).with('1') { collection }
+        get :edit, id: collection.id
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  context '.update' do
+    let(:params) do
+      Hash({
+        collection: {
+          name: 'Summer 2015',
+          description: 'My cool Eurotrip'
+        }
+      })
+    end
+
+    it 'redirects to edit page' do
+      expect(Collection).to receive(:find).with('1') { collection }
+      expect(collection).to receive(:update_attributes).with(params[:collection]) { true }
+
+      put :update, params.merge(id: collection.id)
+
+      expect(response).to redirect_to(edit_collection_path(collection.id))
+    end
+
+    context 'invalid update' do
+      it 'renders back with errors' do
+        expect(Collection).to receive(:find).with('1') { collection }
+        expect(collection).to receive(:update_attributes).with(params[:collection]) { false }
+        expect(collection).to receive_message_chain('errors.full_messages') { ['Name cannot be blank'] }
+
+        put :update, params.merge(id: collection.id)
+
+        expect(response).to render_template(:edit)
+        expect(response.body).to match('Name cannot be blank')
       end
     end
   end

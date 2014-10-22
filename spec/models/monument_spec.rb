@@ -32,4 +32,14 @@ describe Monument do
       end
     end
   end
+
+  specify '.photos_count, .thumb_url' do
+    monument = Monument.make!
+    picture  = Picture.make!
+
+    monument.pictures << picture
+
+    expect(monument.photos_count).to eq(1)
+    expect(monument.thumb_url).to eq(picture.url(:square_100))
+  end
 end

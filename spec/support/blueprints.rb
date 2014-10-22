@@ -15,7 +15,8 @@ end
 
 Collection.blueprint do
   name { 'Summer 2014' }
-  user { User.make! }
+  description { 'My Eurotrip' }
+  user { User.make }
 end
 
 Monument.blueprint do

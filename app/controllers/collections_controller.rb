@@ -1,7 +1,7 @@
 class CollectionsController < ManageController
 
   def edit
-    @collection = Collection.find(params[:id])
+    @collection ||= fetch_collection
   end
 
   def create
@@ -17,7 +17,7 @@ class CollectionsController < ManageController
   end
 
   def update
-    @collection = Collection.find(params[:id])
+    @collection ||= fetch_collection
 
     if @collection.update_attributes(collection_params)
       flash[:success] = 'Album Updated!'
@@ -34,5 +34,16 @@ class CollectionsController < ManageController
     params.require(:collection).permit([
       :name, :description, :user_id, { monuments_attributes: [ :name ] }
     ])
+  end
+
+  def fetch_collection
+    @collection ||= Collection.find(params[:id])
+  end
+
+  def check_ownership
+    if fetch_collection.user_id != @current_user.id
+      flash[:error] = 'You cannot do this!'
+      redirect_to root_path
+    end
   end
 end

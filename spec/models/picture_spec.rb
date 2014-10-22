@@ -30,11 +30,24 @@ describe Picture do
       end
 
       context 'without extension' do
-        it 'does not save' do
-          expect(uploader).to_not receive(:store!)
+        it 'extracts extension from original_filename' do
+          expect(uploader).to receive(:store!)
+          expect(io).to receive(:original_filename) { '1.jpg' }
 
-          Picture.create(io: io)
-          expect(Picture.count).to eq(0)
+          pic = Picture.create(io: io)
+
+          expect(pic.uuid).to eq('uuid')
+          expect(pic.extension).to eq('jpg')
+        end
+
+        context 'when io has no original_filename method' do
+          it 'does not save' do
+            expect(uploader).to_not receive(:store!)
+
+            Picture.create(io: double('io'))
+
+            expect(Picture.count).to eq(0)
+          end
         end
       end
 

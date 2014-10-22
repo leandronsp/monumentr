@@ -9,6 +9,6 @@ class ManageController < ApplicationController
   end
 
   def check_ownership
-   # TODO: to be implemented
+    fail 'Subclass MUST implement this'
   end
 end

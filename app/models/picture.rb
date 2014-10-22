@@ -6,7 +6,7 @@ class Picture < ActiveRecord::Base
   validates_presence_of :extension
 
   before_validation do
-    if self.extension.blank? && self.io.present?
+    if self.extension.blank? && self.io.respond_to?(:original_filename)
       self.extension = File.extname(self.io.original_filename)[1..-1]
     end
   end

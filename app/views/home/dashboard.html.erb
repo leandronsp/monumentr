@@ -4,7 +4,7 @@
     <% @collections.each do |collection| %>
       <li class='card'>
         <p><a href=<%= edit_collection_path(collection.id) %>><%= collection.name %></a></p>
-        <% if collection.thumb_url %>
+        <% if collection.thumb_url.present? %>
           <img src=<%= collection.thumb_url %>/>
         <% end %>
         <small><%= collection.monuments_count %> monuments</small>

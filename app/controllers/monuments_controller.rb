@@ -1,6 +1,8 @@
 class MonumentsController < ManageController
+  before_filter :check_ownership, only: [:edit, :update, :new]
+
   def new
-    @collection = Collection.find(params[:collection_id])
+    @collection ||= Collection.find(params[:collection_id])
   end
 
   def create
@@ -17,13 +19,13 @@ class MonumentsController < ManageController
   end
 
   def edit
-    @monument   = Monument.find(params[:id])
-    @collection = @monument.collection
+    @monument   ||= fetch_monument
+    @collection ||= fetch_collection
   end
 
   def update
-    @monument   = Monument.find(params[:id])
-    @collection = @monument.collection
+    @monument   ||= fetch_monument
+    @collection ||= fetch_collection
 
     if @monument.update_attributes(monument_params)
       flash[:success] = 'Monument Updated!'
@@ -40,5 +42,26 @@ class MonumentsController < ManageController
     params.require(:monument).permit([
       :name, :description, :category, :collection_id, { pictures_attributes: [ :io ] }
     ])
+  end
+
+  def fetch_monument
+    @monument ||= Monument.find(params[:id])
+  end
+
+  def fetch_collection
+    @collection ||= begin
+      if params[:collection_id]
+        Collection.find(params[:collection_id])
+      else
+        fetch_monument.collection
+      end
+    end
+  end
+
+  def check_ownership
+    if fetch_collection.user_id != @current_user.id
+      flash[:error] = 'You cannot do this!'
+      redirect_to root_path
+    end
   end
 end
