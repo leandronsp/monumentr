@@ -8,7 +8,7 @@ end
 
 User.blueprint do
   name { 'Chuck Norris' }
-  email { 'chuck@norris.com' }
+  email { "chuck#{sn}@norris.com" }
   password { '123' }
   password_confirmation { '123' }
 end

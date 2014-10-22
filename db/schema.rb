@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020103409) do
+ActiveRecord::Schema.define(version: 20141022143935) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "collections", force: true do |t|
     t.string   "name"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20141020103409) do
     t.datetime "updated_at"
   end
 
-  add_index "collections", ["user_id"], name: "index_collections_on_user_id"
+  add_index "collections", ["user_id"], name: "index_collections_on_user_id", using: :btree
 
   create_table "monument_pictures", force: true do |t|
     t.integer  "monument_id"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20141020103409) do
     t.datetime "updated_at"
   end
 
-  add_index "monument_pictures", ["monument_id", "picture_id"], name: "index_monument_pictures_on_monument_id_and_picture_id", unique: true
+  add_index "monument_pictures", ["monument_id", "picture_id"], name: "index_monument_pictures_on_monument_id_and_picture_id", unique: true, using: :btree
 
   create_table "monuments", force: true do |t|
     t.string   "name"
@@ -41,7 +44,15 @@ ActiveRecord::Schema.define(version: 20141020103409) do
     t.datetime "updated_at"
   end
 
-  add_index "monuments", ["collection_id"], name: "index_monuments_on_collection_id"
+  add_index "monuments", ["collection_id"], name: "index_monuments_on_collection_id", using: :btree
+
+  create_table "pg_search_documents", force: true do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "pictures", id: false, force: true do |t|
     t.string   "uuid",       null: false
@@ -50,7 +61,7 @@ ActiveRecord::Schema.define(version: 20141020103409) do
     t.datetime "updated_at"
   end
 
-  add_index "pictures", ["uuid"], name: "index_pictures_on_uuid", unique: true
+  add_index "pictures", ["uuid"], name: "index_pictures_on_uuid", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -61,7 +72,7 @@ ActiveRecord::Schema.define(version: 20141020103409) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["encrypted_password"], name: "index_users_on_encrypted_password"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["encrypted_password"], name: "index_users_on_encrypted_password", using: :btree
 
 end

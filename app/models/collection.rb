@@ -1,6 +1,11 @@
 class Collection < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :search, :against => [:name, :description]
+
+  multisearchable against: [:name, :description]
+
+  pg_search_scope :_search,
+    against: [:name, :description],
+    associated_against: { monuments: [:name, :description, :category] }
 
   belongs_to :user
   has_many   :monuments, dependent: :destroy

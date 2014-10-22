@@ -1,6 +1,7 @@
 class Monument < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :search, :against => [:name, :description, :category]
+
+  multisearchable against: [:name, :description, :category]
 
   belongs_to :collection
   has_many   :monument_pictures, dependent: :destroy

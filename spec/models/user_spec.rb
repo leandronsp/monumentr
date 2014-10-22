@@ -11,18 +11,18 @@ describe User do
 
     context 'duplicated email' do
       before do
-        User.make!
+        User.make!(email: 'chuck@norris.com')
       end
 
       it 'raises ActiveRecord::RecordNotUnique error' do
-        expect{ User.make! }.to raise_error(ActiveRecord::RecordNotUnique)
+        expect{ User.make!(email: 'chuck@norris.com') }.to raise_error(ActiveRecord::RecordNotUnique)
       end
     end
   end
 
   describe '.authenticate!' do
     before do
-      User.make!
+      User.make!(email: 'chuck@norris.com')
     end
 
     it 'returns the user' do
