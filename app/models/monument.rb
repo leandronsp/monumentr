@@ -1,4 +1,7 @@
 class Monument < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search, :against => [:name, :description, :category]
+
   belongs_to :collection
   has_many   :monument_pictures, dependent: :destroy
   has_many   :pictures,          through: :monument_pictures, dependent: :destroy
@@ -10,5 +13,13 @@ class Monument < ActiveRecord::Base
 
   def photos_count
     pictures.count
+  end
+
+  def thumb_url
+    MonumentPicture
+      .where(monument_id: id)
+      .order('created_at DESC')
+      .first
+      .try(:picture).try(:url, :square_100)
   end
 end

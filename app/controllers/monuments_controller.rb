@@ -9,7 +9,7 @@ class MonumentsController < ManageController
 
     if @monument.save
       flash[:success] = 'Monument created!'
-      redirect_to edit_collection_path(@collection.id)
+      redirect_to edit_monument_path(@monument.id)
     else
       flash.now[:error] = @monument.errors.full_messages.join(',')
       render :new

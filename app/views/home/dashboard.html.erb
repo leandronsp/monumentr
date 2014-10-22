@@ -1,15 +1,16 @@
-<a href=<%= new_collection_path %> class='button'>Create Album</a>
-
+<h3><%= @current_user.name %>'s Albums</h3>
 <ul class='collections'>
-  <% @collections.each do |collection| %>
-    <li class='card'>
-      <p><a href=<%= edit_collection_path(collection.id) %>><%= collection.name %></a></p>
-      <% if collection.thumb_url %>
-        <img src=<%= collection.thumb_url %>/>
-      <% end %>
-      <small><%= collection.monuments_count %> monuments</small>
-      <small><%= collection.photos_count %> photos</small>
-    </li>
+  <% if @collections.present? %>
+    <% @collections.each do |collection| %>
+      <li class='card'>
+        <p><a href=<%= edit_collection_path(collection.id) %>><%= collection.name %></a></p>
+        <% if collection.thumb_url %>
+          <img src=<%= collection.thumb_url %>/>
+        <% end %>
+        <small><%= collection.monuments_count %> monuments</small>
+        <small><%= collection.photos_count %> photos</small>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 

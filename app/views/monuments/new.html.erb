@@ -1,6 +1,6 @@
 <div class='center'>
   <h1>New Monument</h1>
-  <h3>Album: <%= @collection.name %></h3>
+  <h3>Album: <a href='<%= edit_collection_path(@collection) %>'><%= @collection.name %></a></h3>
   <h5><%= @collection.description %></h5>
 
   <%= form_tag monuments_path, method: :post do %>

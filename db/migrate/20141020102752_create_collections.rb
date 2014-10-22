@@ -4,6 +4,7 @@ class CreateCollections < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.integer :user_id
+      t.timestamps
     end
 
     add_index :collections, :user_id

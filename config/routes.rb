@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get  '/logout',   to: 'sessions#destroy', as: :logout
 
+  get '/search',    to: 'search#perform',   as: :search
+
   resources :collections
   resources :monuments
 

@@ -12,6 +12,7 @@
   <%= link_to t('home'), root_path %>
 
   <% if @current_user.authenticated? %>
+    <%= link_to t('buttons.create_album'), new_collection_path %>
     <%= link_to t('logout'), logout_path %>
     <p>Hello, <%= @current_user.name %></p>
   <% else %>
@@ -24,7 +25,23 @@
   <p class=<%= name %>><%= msg %></div>
 <% end %>
 
+<% if @current_user.authenticated? %>
+  <div class='center search'>
+    <%= form_tag search_path, id: 'search_form', method: :get do %>
+      <input type='text' class='search' name='term' value='<%= @term %>' placeholder='Search for Albums/Monuments'>
+    <% end %>
+  </div>
+<% end %>
+
 <%= yield %>
 
 </body>
+<script>
+  $('input.search').keypress(function(event) {
+    if (event.which == 13) {
+      event.preventDefault();
+      $('#search_form').submit();
+    }
+  });
+</script>
 </html>

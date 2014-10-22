@@ -1,4 +1,7 @@
 class Collection < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search, :against => [:name, :description]
+
   belongs_to :user
   has_many   :monuments, dependent: :destroy
 
@@ -9,7 +12,7 @@ class Collection < ActiveRecord::Base
   def thumb_url
     @thumb_url ||= begin
       if monuments.present?
-        picture = monuments.first.pictures.first
+        picture = MonumentPicture.where(monument_id: monuments.pluck(:id)).order('created_at DESC').first.try(:picture)
         if picture.present?
           picture.url(:square_100)
         end

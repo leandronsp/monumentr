@@ -3,11 +3,14 @@
   <h3>Album: <a href='<%= edit_collection_path(@collection) %>'><%= @collection.name %></a></h3>
   <h5><%= @collection.description %></h5>
 
-  <%= form_tag monument_path(@monument), method: :put do %>
+  <%= form_tag monument_path(@monument), method: :put, enctype: 'multipart/form-data' do %>
     <input type='text' name='monument[name]' value='<%= @monument.name %>' placeholder = 'Name'>
     <input type='text' name='monument[description]' value='<%= @monument.description %>' placeholder = 'Description'>
     <input type='text' name='monument[category]' value='<%= @monument.category %>' placeholder = 'Category'>
     <input type='hidden' name='monument[id]' value=<%= @monument.id %>>
+
+    <h4>Upload Photos</h4>
+    <input type='file' name='monument[pictures_attributes][][io]' class='picture_file' multiple>
 
     <input type='submit' class='button' value=<%= t('buttons.update_monument') %>>
 
@@ -16,4 +19,18 @@
 
 </div>
 
-<%= render 'collections/monuments' %>
+<h3>Photos</h3>
+<% if @monument.pictures.blank? %>
+  <p>No photos yet</p>
+<% end %>
+
+<% @monument.pictures.each do |picture| %>
+  <p><img src='<%= picture.url(:square_100) %>'/></p>
+<% end %>
+
+<script>
+  $(document.body).on('change', '.picture_file' ,function(){
+    var last = $('.picture_file').last();
+    $(this).clone().insertAfter(last)
+  });
+</script>

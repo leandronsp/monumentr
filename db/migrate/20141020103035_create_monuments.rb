@@ -5,6 +5,7 @@ class CreateMonuments < ActiveRecord::Migration
       t.text :description
       t.string :category
       t.integer :collection_id
+      t.timestamps
     end
 
     add_index :monuments, :collection_id

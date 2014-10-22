@@ -23,6 +23,7 @@ h1 {
   padding-bottom: 50px;
 }
 
+
 div.center {
   position: absolute;
   margin-left: 33%;
@@ -36,6 +37,10 @@ div.center input {
   font-size: 25px;
   padding-left: 10px;
   margin-bottom: 30px;
+}
+
+div.center.search {
+  margin-top: 2%;
 }
 
 div.center p.message {

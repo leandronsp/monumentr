@@ -86,6 +86,11 @@ GEM
       subexec (~> 0.2.1)
     minitest (5.4.2)
     multi_json (1.10.1)
+    pg (0.17.1)
+    pg_search (0.7.8)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -187,6 +192,8 @@ DEPENDENCIES
   jquery-rails
   machinist
   mini_magick
+  pg
+  pg_search
   pry
   rails (= 4.1.6)
   rspec-rails (~> 3.1)

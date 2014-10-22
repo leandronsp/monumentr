@@ -5,6 +5,12 @@ class Picture < ActiveRecord::Base
 
   validates_presence_of :extension
 
+  before_validation do
+    if self.extension.blank? && self.io.present?
+      self.extension = File.extname(self.io.original_filename)[1..-1]
+    end
+  end
+
   before_save do
     if self.io.present?
       self.uuid ||= SecureRandom.uuid

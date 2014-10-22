@@ -1,9 +1,18 @@
+<a href=<%= new_monument_path(collection_id: @collection.id) %> class='button'>Add Monument</a>
+
 <h4>Monuments</h5>
 <ul class='collections'>
   <% @collection.monuments.each do |monument| %>
     <li class='card'>
       <p><a href=<%= edit_monument_path(monument.id) %>><%= monument.name %></a></p>
+      <% if monument.thumb_url %>
+        <img src=<%= monument.thumb_url %>/>
+      <% end %>
       <small><%= monument.photos_count %> photos</small>
     </li>
   <% end %>
 </ul>
+
+<% if @collection.monuments.blank? %>
+  <p>No monuments yet</p>
+<% end %>

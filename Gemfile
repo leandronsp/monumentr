@@ -12,6 +12,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'settingslogic'
+gem 'pg'
+gem 'pg_search'
 
 group :development, :test do
   gem 'codeclimate-test-reporter', require: nil
