@@ -12,6 +12,7 @@ Manage the collection of pictures of your favourite monuments
 * RSpec
 * Simplecov
 * Guard
+* Postgres
 
 Testing & Coverage
 -
