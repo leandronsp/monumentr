@@ -21,6 +21,13 @@ bundle exec rspec / bundle exec guard
 
 open coverage/index.html
 ```
+TODO
+--
+* Edit/Delete account
+* Fancy photo uploader
+* Fancy photo directory
+* Sign up Email confirmation
+
 Author
 -
 @leandronsp
