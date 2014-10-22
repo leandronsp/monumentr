@@ -19,7 +19,6 @@ development:
 test:
   adapter: postgresql
   database: monumentr_test
-  username: postgres
 
 production:
   <<: *default
