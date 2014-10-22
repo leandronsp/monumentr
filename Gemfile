@@ -15,6 +15,9 @@ gem 'settingslogic'
 gem 'pg'
 gem 'pg_search'
 
+# Heroku
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'pry'
@@ -27,3 +30,5 @@ group :test do
   gem 'simplecov'
   gem 'machinist'
 end
+
+ruby '2.1.2'
