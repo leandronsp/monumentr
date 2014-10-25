@@ -12,7 +12,7 @@ Manage the collection of pictures of your favourite monuments
 * RSpec
 * Simplecov
 * Guard
-* Postgres
+* Postgres (Database & Full Text Search) - http://www.postgresql.org/docs/9.3/static/textsearch.html
 
 Testing & Coverage
 -
