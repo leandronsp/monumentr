@@ -1,5 +1,5 @@
 class MonumentsController < ManageController
-  before_filter :check_ownership, only: [:edit, :update, :new]
+  before_action :check_ownership, only: [:edit, :update, :new]
 
   def new
     @collection ||= Collection.find(params[:collection_id])
@@ -41,7 +41,7 @@ class MonumentsController < ManageController
   def monument_params
     params.require(:monument).permit([
       :name, :description, :category, :collection_id, { pictures_attributes: [ :io ] }
-    ])
+    ]).to_h
   end
 
   def fetch_monument

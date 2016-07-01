@@ -14,7 +14,7 @@ describe SearchController, type: :controller do
 
       expect(Search).to receive(:collections).with('summer')   { [summer, winter] }
 
-      get :perform, term: 'summer'
+      get :perform, params: { term: 'summer' }
       expect(response).to render_template('home/dashboard')
     end
   end

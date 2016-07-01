@@ -16,7 +16,7 @@ class Picture < ActiveRecord::Base
       self.uuid ||= SecureRandom.uuid
       uploader.store!(self.io)
     else
-      false
+      throw :abort
     end
   end
 

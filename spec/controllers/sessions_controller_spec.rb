@@ -5,7 +5,7 @@ describe SessionsController, type: :controller do
     let(:user) { User.make! }
 
     before do
-      post :create, user: { email: user.email, password: '123' }
+      post :create, params: { user: { email: user.email, password: '123' }}
     end
 
     it 'finds and put user_id into session' do
@@ -15,7 +15,7 @@ describe SessionsController, type: :controller do
 
     context 'invalid credentials' do
       before do
-        post :create, user: { email: user.email, password: 'invalid' }
+        post :create, params: { user: { email: user.email, password: 'invalid' }}
       end
 
       it 'renders back with error message' do

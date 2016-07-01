@@ -8,7 +8,7 @@ Monumentr
 Manage the collection of pictures of your favourite monuments
 
 * Ruby 2.2.3+
-* Rails 4.2+
+* Rails 5.0.0
 * CarrierWave
 * RSpec
 * Simplecov

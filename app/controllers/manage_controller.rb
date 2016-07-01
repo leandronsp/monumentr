@@ -1,6 +1,6 @@
 class ManageController < ApplicationController
-  before_filter :check_authorization
-  before_filter :check_ownership, only: [:edit, :update]
+  before_action :check_authorization
+  before_action :check_ownership, only: [:edit, :update]
 
   def check_authorization
     unless @current_user.authenticated?

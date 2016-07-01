@@ -4,7 +4,7 @@ describe UsersController, type: :controller do
   describe 'registration' do
     before do
       params = { name: 'Chuck Norris', email: 'chuck@norris.com' }
-      post :create, user: params.merge(password: '123', password_confirmation: '123')
+      post :create, params: { user: params.merge(password: '123', password_confirmation: '123') }
     end
 
     it 'registers the user and redirect to manage dashboard' do
@@ -17,7 +17,7 @@ describe UsersController, type: :controller do
     context 'duplicated email' do
       before do
         params = { name: 'Chuck Norris', email: 'chuck@norris.com' }
-        post :create, user: params.merge(password: '123', password_confirmation: '123')
+        post :create, params: { user: params.merge(password: '123', password_confirmation: '123') }
       end
 
       it 'render error message' do
@@ -28,7 +28,7 @@ describe UsersController, type: :controller do
     context 'missing email' do
       before do
         params = { name: 'Chuck Norris' }
-        post :create, user: params.merge(password: '123', password_confirmation: '123')
+        post :create, params: { user: params.merge(password: '123', password_confirmation: '123') }
       end
 
       it 'render error message' do

@@ -33,7 +33,7 @@ class CollectionsController < ManageController
   def collection_params
     params.require(:collection).permit([
       :name, :description, :user_id, { monuments_attributes: [ :name ] }
-    ])
+    ]).to_h
   end
 
   def fetch_collection

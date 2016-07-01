@@ -25,7 +25,7 @@ describe CollectionsController, type: :controller do
       expect(Collection).to receive(:new).with(params[:collection]) { collection }
       expect(collection).to  receive(:save) { true }
 
-      post :create, params
+      post :create, params: params
       expect(response).to redirect_to(edit_collection_path(1))
     end
 
@@ -37,7 +37,7 @@ describe CollectionsController, type: :controller do
         expect(collection).to receive(:save) { false }
         expect(collection).to receive_message_chain('errors.full_messages') { ['Name cannot be blank'] }
 
-        post :create, params
+        post :create, params: params
         expect(response).to render_template(:new)
         expect(response.body).to match('Name cannot be blank')
       end
@@ -55,7 +55,7 @@ describe CollectionsController, type: :controller do
   context '.edit' do
     it 'renders form with the collection' do
       expect(Collection).to receive(:find).with('1') { collection }
-      get :edit, id: collection.id
+      get :edit, params: { id: collection.id }
 
       expect(response).to render_template(:edit)
     end
@@ -65,7 +65,7 @@ describe CollectionsController, type: :controller do
 
       it 'redirects to dashboard with error message' do
         expect(Collection).to receive(:find).with('1') { collection }
-        get :edit, id: collection.id
+        get :edit, params: { id: collection.id }
 
         expect(response).to redirect_to(root_path)
       end
@@ -86,7 +86,7 @@ describe CollectionsController, type: :controller do
       expect(Collection).to receive(:find).with('1') { collection }
       expect(collection).to receive(:update_attributes).with(params[:collection]) { true }
 
-      put :update, params.merge(id: collection.id)
+      put :update, params: params.merge(id: collection.id)
 
       expect(response).to redirect_to(edit_collection_path(collection.id))
     end
@@ -97,7 +97,7 @@ describe CollectionsController, type: :controller do
         expect(collection).to receive(:update_attributes).with(params[:collection]) { false }
         expect(collection).to receive_message_chain('errors.full_messages') { ['Name cannot be blank'] }
 
-        put :update, params.merge(id: collection.id)
+        put :update, params: params.merge(id: collection.id)
 
         expect(response).to render_template(:edit)
         expect(response.body).to match('Name cannot be blank')
