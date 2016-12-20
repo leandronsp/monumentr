@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.0'
+gem 'rails', '5.0.0.1'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -38,4 +38,4 @@ group :development do
   gem 'spring'
 end
 
-ruby '2.2.3'
+ruby '2.3.1'
