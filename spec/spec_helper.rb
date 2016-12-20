@@ -6,7 +6,7 @@ require 'simplecov'
 
 if ENV['CODECLIMATE_REPO_TOKEN']
   require 'codeclimate-test-reporter'
-  CodeClimate::TestReporter.start
+  SimpleCov.start 'rails'
 end
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
