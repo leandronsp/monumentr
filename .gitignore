@@ -19,3 +19,4 @@ coverage
 test
 pictures
 public/pictures
+vendor/bundle
