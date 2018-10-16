@@ -21,7 +21,6 @@ group :development, :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'pry-byebug'
   gem 'spring-commands-rspec'
-  gem 'sqlite3'
 end
 
 group :test do
