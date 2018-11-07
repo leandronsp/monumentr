@@ -26,8 +26,10 @@ blocks:
           - bundle install --deployment
       - name: Prepare DB
         commands:
+          - checkout
           - bundle exec rake db:setup
           - bundle exec rake db:test:prepare
       - name: Unit tests
         commands:
+          - checkout
           - bundle exec rspec spec
