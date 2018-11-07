@@ -6,7 +6,7 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: "Build & Test"
+  - name: "CI"
     task:
       env_vars:
         - name: RAILS_ENV
@@ -18,13 +18,16 @@ blocks:
       prologue:
         commands:
           - sem-service start postgres
+      jobs:
+      - name: Build
+        commands:
           - checkout
           - cache restore bundle-$(checksum Gemfile.lock)
           - bundle install --deployment
+      - name: Prepare DB
+        commands:
           - bundle exec rake db:setup
           - bundle exec rake db:test:prepare
-      jobs:
-      - name: Build & Test
+      - name: Unit tests
         commands:
           - bundle exec rspec spec
-          - echo "Build done."
