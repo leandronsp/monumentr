@@ -27,7 +27,6 @@ blocks:
       jobs:
       - name: Bundle
         commands:
-          - sem-version ruby 2.5.1
           - checkout
           - bundle install --deployment --path vendor/bundle
           - bundle exec rake db:setup
@@ -39,5 +38,6 @@ blocks:
       jobs:
       - name: RSpec
         commands:
+          - checkout
           - bundle exec rspec spec
           - echo "Unit tests done."
