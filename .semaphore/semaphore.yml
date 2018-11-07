@@ -22,13 +22,21 @@ blocks:
       - name: Bundle
         commands:
           - checkout
-          - bundle install --deployment --path vendor/bundle
+          - cache restore bundle-$(checksum Gemfile.lock)
+          - bundle install --deployment
+          - cache store bundle-$(checksum Gemfile.lock) vendor/bundle
           - bundle exec rake db:setup
           - bundle exec rake db:test:prepare
           - echo "Build done."
 
   - name: "Unit tests"
     task:
+      prologue:
+        commands:
+          - cache restore bundle-$(checksum Gemfile.lock)
+      env_vars:
+        - name: BUNDLE_PATH
+          value: vendor/bundle
       jobs:
       - name: RSpec
         commands:
