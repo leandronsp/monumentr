@@ -31,15 +31,15 @@ blocks:
 
   - name: "Unit tests"
     task:
-      prologue:
-        commands:
-          - cache restore bundle-$(checksum Gemfile.lock)
       env_vars:
         - name: BUNDLE_PATH
           value: vendor/bundle
+      prologue:
+        commands:
+          - checkout
+          - cache restore bundle-$(checksum Gemfile.lock)
       jobs:
       - name: RSpec
         commands:
-          - checkout
           - bundle exec rspec spec
           - echo "Unit tests done."
