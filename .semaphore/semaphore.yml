@@ -13,6 +13,8 @@ blocks:
         commands:
           - sem-service start postgres
           - sudo apt-get install -y -qq postgresql-client
+          - createdb -U postgres -h 0.0.0.0 monumentr_test
+          - psql -h 0.0.0.0 -U postgres -c "\l" | grep monumentr_test
           - sem-service status postgres
           - echo "DB done."
   - name: "Build"
