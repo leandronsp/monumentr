@@ -28,3 +28,6 @@ blocks:
         commands:
           - bundle exec rspec spec
           - echo "Build done."
+promotions:
+  - name: Production deploy
+    pipeline_file: production-deploy.yml
