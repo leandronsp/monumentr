@@ -32,5 +32,6 @@ blocks:
       jobs:
       - name: RSpec
         commands:
+          - checkout
           - bundle exec rspec spec
           - echo "Unit tests done."
