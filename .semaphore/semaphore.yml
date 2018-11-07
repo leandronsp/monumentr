@@ -6,13 +6,6 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: "DB"
-    task:
-      jobs:
-      - name: Prepare DB
-        commands:
-          - sem-service start postgres
-          - echo "DB done."
   - name: "Build"
     task:
       env_vars:
@@ -20,6 +13,9 @@ blocks:
           value: test
         - name: APP_ENV
           value: test
+      prologue:
+        commands:
+          - sem-service start postgres
       jobs:
       - name: Bundle
         commands:
@@ -34,6 +30,5 @@ blocks:
       jobs:
       - name: RSpec
         commands:
-          - checkout
           - bundle exec rspec spec
           - echo "Unit tests done."
