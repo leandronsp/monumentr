@@ -6,7 +6,7 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: "CI"
+  - name: "Build"
     task:
       env_vars:
         - name: RAILS_ENV
@@ -18,18 +18,20 @@ blocks:
       prologue:
         commands:
           - sem-service start postgres
-      jobs:
-      - name: Build
-        commands:
           - checkout
           - cache restore bundle-$(checksum Gemfile.lock)
           - bundle install --deployment
-      - name: Prepare DB
-        commands:
-          - checkout
           - bundle exec rake db:setup
           - bundle exec rake db:test:prepare
-      - name: Unit tests
+      jobs:
+      - name: Test
         commands:
-          - checkout
           - bundle exec rspec spec
+          - echo "Build done."
+
+  - name: "Deploy"
+    task:
+      jobs:
+      - name: Heroku
+        commands:
+          - git push heroku master
