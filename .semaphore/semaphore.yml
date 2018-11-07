@@ -38,6 +38,7 @@ blocks:
         commands:
           - checkout
           - cache restore bundle-$(checksum Gemfile.lock)
+          - bundle
       jobs:
       - name: RSpec
         commands:
