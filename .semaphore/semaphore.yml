@@ -13,6 +13,8 @@ blocks:
           value: test
         - name: APP_ENV
           value: test
+        - name: PGUSER
+          value: postgres
       prologue:
         commands:
           - sem-service start postgres
