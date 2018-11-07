@@ -34,4 +34,5 @@ blocks:
       jobs:
       - name: Heroku
         commands:
+          - checkout
           - git push heroku master
