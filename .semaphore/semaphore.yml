@@ -8,23 +8,20 @@ agent:
 blocks:
   - name: "DB"
     task:
-      env_vars:
-        - name: APP_ENV
-          value: prod
       jobs:
       - name: Prepare DB
         commands:
           - sem-service start postgres
           - sudo apt-get install -y -qq postgresql-client
-          - createdb -U postgres -h 0.0.0.0 monumentr_test
-          - psql -h 0.0.0.0 -U postgres -c "\l" | grep monumentr_test
           - sem-service status postgres
           - echo "DB done."
   - name: "Build"
     task:
       env_vars:
+        - name: RAILS_ENV
+          value: test
         - name: APP_ENV
-          value: prod
+          value: test
       jobs:
       - name: Bundle
         commands:
