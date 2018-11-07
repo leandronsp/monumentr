@@ -28,11 +28,3 @@ blocks:
         commands:
           - bundle exec rspec spec
           - echo "Build done."
-
-  - name: "Deploy"
-    task:
-      jobs:
-      - name: Heroku
-        commands:
-          - checkout
-          - git push heroku master
