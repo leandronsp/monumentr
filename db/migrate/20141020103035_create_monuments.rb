@@ -1,4 +1,4 @@
-class CreateMonuments < ActiveRecord::Migration
+class CreateMonuments < ActiveRecord::Migration[5.2]
   def change
     create_table :monuments do |t|
       t.string :name

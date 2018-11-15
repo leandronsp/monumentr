@@ -1,0 +1,17 @@
+- hosts: monumentr_staging
+  gather_facts: no
+  vars:
+    application: monumentr
+    stage: staging
+    home_path: /home/ubuntu
+    root_path: '{{home_path}}/monumentr'
+    domain_name: staging.monumentr.tech
+    protocol: http
+
+  roles:
+    - ./roles/postgres
+    - ./roles/python
+    - ./roles/nodejs
+    - ./roles/ruby
+    - ./roles/rails-app
+    - ./roles/webserver

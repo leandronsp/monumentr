@@ -17,6 +17,8 @@ gem 'pg_search'
 # Heroku
 gem 'rails_12factor', group: :production
 
+gem 'puma'
+
 group :development, :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'pry-byebug'
@@ -33,6 +35,9 @@ group :test do
 end
 
 group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
