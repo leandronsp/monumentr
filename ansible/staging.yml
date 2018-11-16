@@ -2,10 +2,15 @@
   gather_facts: no
   vars:
     application: monumentr
+    application_stg: monumentr_stg
+    application_master: monumentr_master
     stage: staging
     home_path: /home/ubuntu
     root_path: '{{home_path}}/monumentr'
-    domain_name: staging.monumentr.tech
+    root_path_stg: '{{home_path}}/monumentr.staging'
+    root_path_master: '{{home_path}}/monumentr.master'
+    domain_name_stg: staging.monumentr.tech
+    domain_name_master: master.monumentr.tech
     protocol: http
 
   roles:
