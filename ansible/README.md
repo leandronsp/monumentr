@@ -5,7 +5,7 @@
 Prepare user:
 
   - ssh to-machine
-  - `adduser ubuntu`
+  - `adduser ubuntu --disabled-password`
   - `adduser ubuntu sudo`
   - `usermod -aG sudo ubuntu`
   - `sudo visudo` (edit in nano mode): %sudo   ALL=(ALL:ALL) NOPASSWD: ALL
