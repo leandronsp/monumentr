@@ -1,6 +1,8 @@
 #!/usr/bin/env puma
 
-root_dir = '/home/ubuntu/monumentr'
+instance = ENV['INSTANCE'] || 'staging'
+
+root_dir = "/home/ubuntu/monumentr.#{instance}"
 working_directory "#{root_dir}/current"
 listen "#{root_dir}/shared/tmp/sockets/puma.sock", backlog: 64
 timeout 600
@@ -17,7 +19,7 @@ tag ''
 
 pidfile "#{root_dir}/shared/tmp/pids/puma.pid"
 state_path "#{root_dir}/shared/tmp/pids/puma.state"
-stdout_redirect '/home/ubuntu/monumentr/shared/log/puma_access.log', '/home/ubuntu/monumentr/shared/log/puma_error.log', true
+stdout_redirect "/home/ubuntu/monumentr.#{instance}/shared/log/puma_access.log', '/home/ubuntu/monumentr.#{instance}/shared/log/puma_error.log", true
 
 threads 0,16
 

@@ -7,7 +7,9 @@ role :db, %w(ubuntu@88.80.190.77)
 
 server '88.80.190.77', user: 'ubuntu', roles: %w{app web db}
 
-set :deploy_to, '/home/ubuntu/monumentr'
+instance = ENV['INSTANCE'] || 'staging'
+
+set :deploy_to, "/home/ubuntu/monumentr.#{instance}"
 
 set :ssh_options, keys: [File.expand_path('~/.ssh/id_rsa')],
                   forward_agent: true, auth_methods: %w(publickey)
