@@ -14,4 +14,4 @@ set :deploy_to, "/home/ubuntu/monumentr.#{instance}"
 set :ssh_options, keys: [File.expand_path('~/.ssh/id_rsa')],
                   forward_agent: true, auth_methods: %w(publickey)
 
-set :puma_conf, '/home/ubuntu/monumentr/shared/puma.rb'
+set :puma_conf, "/home/ubuntu/monumentr.#{instance}/shared/puma.rb"
