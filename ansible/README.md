@@ -9,7 +9,7 @@ Prepare user:
   - `adduser ubuntu sudo`
   - `usermod -aG sudo ubuntu`
   - `sudo visudo` (edit in nano mode): %sudo   ALL=(ALL:ALL) NOPASSWD: ALL
-  - paste the public key into `/home/ubuntu/authorized_keys`
+  - paste the public key into `/home/ubuntu/.ssh/authorized_keys`
 
 Ansible usage:
 ```
